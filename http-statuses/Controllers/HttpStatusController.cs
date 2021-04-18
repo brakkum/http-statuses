@@ -21,9 +21,11 @@ namespace http_statuses.Controllers
         [Route("{statusCode:int}")]
         public ActionResult GetStatus(int statusCode)
         {
-            return Enum.IsDefined(typeof(HttpStatusCode), statusCode)
-                ? new StatusCodeResult(statusCode)
-                : new StatusCodeResult(404);
+            if (IsValidStatusCode(statusCode))
+            {
+                return new StatusCodeResult(statusCode);
+            }
+            return new RedirectResult("/");
         }
 
         [HttpGet]
