@@ -1,0 +1,33 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTTP Statuses</title>
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+    <style>
+        header a {
+            font-size: 16px;
+            margin-right: 20px;
+        }
+        .status-code {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a href="/">
+        Home
+    </a>
+    <a href="/about">
+        About
+    </a>
+    <a href="https://github.com/brakkum/http-statuses" target="_blank">
+        GitHub
+    </a>
+</header>
+@RenderBody()
+</body>
+</html>

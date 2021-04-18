@@ -1,24 +1,9 @@
-@using System.Net
-@using Microsoft.AspNetCore.Http
 @{
-    Layout = null;
+    Layout = "_base";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>HTTP Statuses</title>
-</head>
-<body>
-<h1>
+<h1 style="margin-bottom: 30px">
     HTTP Status Codes
 </h1>
-<div>
-    @foreach (var code in ViewBag.StatusCodes)
-    {
-        <p>
-            <a href="@(code.Key)">@code.Key</a> : @code.Value
-        </p>
-    }
-</div>
-</body>
-</html>
+<section>
+    @Html.Partial("StatusCodeList")
+</section>

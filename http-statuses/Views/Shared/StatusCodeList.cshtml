@@ -1,0 +1,20 @@
+@using System.Net
+@using Microsoft.AspNetCore.Http.Extensions
+@{
+    var codes = new Dictionary<int, string>();
+    foreach (var code in Enum.GetValues(typeof(HttpStatusCode)))
+    {
+        if (codes.ContainsKey(code.GetHashCode()))
+        {
+            continue;
+        }
+        codes.Add(code.GetHashCode(), code.ToString());
+    }
+    var path = Context.Request.Path.ToString();
+}
+@foreach (var code in codes)
+{
+    <p class="status-code">
+        <a href="@(path.EndsWith("/") ? path : $"{path}/")@(code.Key)">@code.Key</a> : @code.Value
+    </p>
+}

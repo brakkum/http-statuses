@@ -1,0 +1,28 @@
+@using http_statuses.Controllers
+
+@{
+    Layout = "_base";
+}
+
+<h1>
+    @ViewBag.Title
+</h1>
+<section>
+    @if (ViewBag.isValidStatusCode)
+    {
+        HttpStatusController.GetStatusCodeInfo(ViewBag.StatusCode);
+    }
+    else
+    {
+        <p>
+            This site was built mostly for testing and crawling purposes.
+            If it's helpful to you, great!
+            Give it a star on <a href="https://github.com/brakkum/http-statuses" target="_blank">GitHub</a>
+        </p>
+        <p>
+            Check out more info on the individual status codes below.
+            Information scraped from <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">Wikipedia</a>
+        </p>
+        @Html.Partial("StatusCodeList")
+    }
+</section>
