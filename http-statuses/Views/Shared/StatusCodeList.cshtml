@@ -16,5 +16,9 @@
 {
     <p class="status-code">
         <a href="@(path.EndsWith("/") ? path : $"{path}/")@(code.Key)">@code.Key</a> : @code.Value
+        @if (path == "/")
+        {
+            <a href="/about/@(code.Key)">Read More</a>
+        }
     </p>
 }
