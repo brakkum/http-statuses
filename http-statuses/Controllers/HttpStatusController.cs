@@ -53,10 +53,10 @@ namespace http_statuses.Controllers
 
 
         [HttpGet]
-        [Route("{text}")]
-        public ActionResult GetStatus(string text)
+        [Route("{**catchAll}")]
+        public ActionResult CatchAll()
         {
-            return new JsonResult(text);
+            return new RedirectResult("/");
         }
 
         public bool IsValidStatusCode(int statusCode)
