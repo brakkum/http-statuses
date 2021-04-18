@@ -27,19 +27,28 @@ namespace http_statuses.Controllers
         }
 
         [HttpGet]
-        [Route("about/{statusCode:int?}")]
+        [Route("about")]
+        public ActionResult About()
+        {
+            ViewBag.Title = "About";
+            ViewBag.isValidStatusCode = false;
+            return View();
+        }
+
+        [HttpGet]
+        [Route("about/{statusCode:int}")]
         public ActionResult About(int statusCode)
         {
-            var isValidStatusCode = IsValidStatusCode(statusCode);
-            if (statusCode != 0 && !isValidStatusCode)
+            if (!IsValidStatusCode(statusCode))
             {
                 Response.Redirect("/about/");
             }
-            ViewBag.Title = isValidStatusCode ? $"About the {statusCode} Status Code" : "About";
-            ViewBag.isValidStatusCode = isValidStatusCode;
+
+            ViewBag.isValidStatusCode = true;
             ViewBag.StatusCode = statusCode;
             return View();
         }
+
 
         [HttpGet]
         [Route("{text}")]
