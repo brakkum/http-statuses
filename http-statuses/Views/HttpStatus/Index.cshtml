@@ -1,0 +1,24 @@
+@using System.Net
+@using Microsoft.AspNetCore.Http
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTTP Statuses</title>
+</head>
+<body>
+<h1>
+    HTTP Status Codes
+</h1>
+<div>
+    @foreach (var code in ViewBag.StatusCodes)
+    {
+        <p>
+            <a href="@(code.Key)">@code.Key</a> : @code.Value
+        </p>
+    }
+</div>
+</body>
+</html>
