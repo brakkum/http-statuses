@@ -5,5 +5,9 @@
     <RootNamespace>http_statuses</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="1.0.0-alpha-844" />
+  </ItemGroup>
+
 
 </Project>

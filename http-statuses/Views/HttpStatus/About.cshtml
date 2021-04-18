@@ -3,25 +3,27 @@
 @{
     Layout = "_base";
 }
-
-<h1>
-    @ViewBag.Title
-</h1>
+@if (!ViewBag.isValidStatusCode)
+{
+    <h1>
+        @ViewBag.Title
+    </h1>
+}
 <section>
     @if (ViewBag.isValidStatusCode)
     {
-        HttpStatusController.GetStatusCodeInfo(ViewBag.StatusCode);
+        @Html.Raw(await HttpStatusController.GetStatusCodeInfo(ViewBag.StatusCode));
     }
     else
     {
         <p>
             This site was built mostly for testing and crawling purposes.
             If it's helpful to you, great!
-            Give it a star on <a href="https://github.com/brakkum/http-statuses" target="_blank">GitHub</a>
+            Give it a star on <a href="https://github.com/brakkum/http-statuses" target="_blank">GitHub</a>.
         </p>
         <p>
             Check out more info on the individual status codes below.
-            Information scraped from <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">Wikipedia</a>
+            Information scraped from the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">MDN Docs</a>.
         </p>
         @Html.Partial("StatusCodeList")
     }
