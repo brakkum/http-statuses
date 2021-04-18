@@ -28,9 +28,13 @@ namespace http_statuses.Controllers
 
         [HttpGet]
         [Route("about/{statusCode:int?}")]
-        public ActionResult About(int? statusCode)
+        public ActionResult About(int statusCode)
         {
-            var isValidStatusCode = statusCode != null && Enum.IsDefined(typeof(HttpStatusCode), statusCode);
+            var isValidStatusCode = IsValidStatusCode(statusCode);
+            if (statusCode != 0 && !isValidStatusCode)
+            {
+                Response.Redirect("/about/");
+            }
             ViewBag.Title = isValidStatusCode ? $"About the {statusCode} Status Code" : "About";
             ViewBag.isValidStatusCode = isValidStatusCode;
             ViewBag.StatusCode = statusCode;
@@ -42,6 +46,11 @@ namespace http_statuses.Controllers
         public ActionResult GetStatus(string text)
         {
             return new JsonResult(text);
+        }
+
+        public bool IsValidStatusCode(int statusCode)
+        {
+            return Enum.IsDefined(typeof(HttpStatusCode), statusCode);
         }
 
         public static async Task<string> GetStatusCodeInfo(int statusCode)
