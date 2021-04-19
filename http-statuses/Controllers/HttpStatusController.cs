@@ -23,8 +23,14 @@ namespace http_statuses.Controllers
         {
             if (IsValidStatusCode(statusCode))
             {
-                return new StatusCodeResult(statusCode);
+                Response.StatusCode = statusCode;
+                return new JsonResult(new
+                {
+                    success = true,
+                    statusCode,
+                });
             }
+
             return new RedirectResult("/");
         }
 
@@ -109,7 +115,7 @@ namespace http_statuses.Controllers
                 }
             }
 
-            foreach(IHtmlAnchorElement anchor in html.Body.QuerySelectorAll("a"))
+            foreach (IHtmlAnchorElement anchor in html.Body.QuerySelectorAll("a"))
             {
                 if (anchor.Href.Contains("localhost"))
                 {

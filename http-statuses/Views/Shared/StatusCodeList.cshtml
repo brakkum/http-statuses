@@ -1,5 +1,4 @@
 @using System.Net
-@using Microsoft.AspNetCore.Http.Extensions
 @{
     var codes = new Dictionary<int, string>();
     foreach (var code in Enum.GetValues(typeof(HttpStatusCode)))
@@ -11,14 +10,18 @@
         codes.Add(code.GetHashCode(), code.ToString());
     }
     var path = Context.Request.Path.ToString();
+    if (path.EndsWith("/"))
+    {
+        path = path.TrimEnd('/');
+    }
 }
 @foreach (var code in codes)
 {
     <p class="status-code">
-        <a href="@(path.EndsWith("/") ? path : $"{path}/")@(code.Key)">@code.Key</a> : @code.Value
-        @if (path == "/")
+        <a href="@(path)/@(code.Key)?from=@(path == "" ? "home" : "about")">@code.Key</a> : @code.Value
+        @if (path == "")
         {
-            <a href="/about/@(code.Key)">Read More</a>
+            <a href="/about/@(code.Key)?from=read-more">Read More</a>
         }
     </p>
 }
