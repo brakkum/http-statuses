@@ -12,7 +12,10 @@
 <section>
     @if (ViewBag.isValidStatusCode)
     {
-        @Html.Raw(await HttpStatusController.GetStatusCodeInfo(ViewBag.StatusCode));
+        @Html.Raw(await HttpStatusController.GetStatusCodeInfo(ViewBag.StatusCode))
+        <a href="/@ViewBag.StatusCode">
+            <h4>Get @ViewBag.StatusCode Response</h4>
+        </a>
     }
     else
     {

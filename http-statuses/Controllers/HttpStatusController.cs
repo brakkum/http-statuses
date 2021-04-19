@@ -23,6 +23,10 @@ namespace http_statuses.Controllers
         {
             if (IsValidStatusCode(statusCode))
             {
+                if (statusCode < 200)
+                {
+                    return new StatusCodeResult(statusCode);
+                }
                 Response.StatusCode = statusCode;
                 return new JsonResult(new
                 {
