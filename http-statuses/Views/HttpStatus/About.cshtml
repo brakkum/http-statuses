@@ -12,6 +12,12 @@
 <section>
     @if (ViewBag.isValidStatusCode)
     {
+        <span>
+            Information scraped from
+            <a href="@HttpStatusController.GetStatusCodeInfoUrl(ViewBag.StatusCode)">
+                this MDN page
+            </a>
+        </span>
         @Html.Raw(await HttpStatusController.GetStatusCodeInfo(ViewBag.StatusCode))
         <a href="/@ViewBag.StatusCode">
             <h4>Get @ViewBag.StatusCode Response</h4>

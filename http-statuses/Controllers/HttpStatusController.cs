@@ -74,10 +74,15 @@ namespace http_statuses.Controllers
             return Enum.IsDefined(typeof(HttpStatusCode), statusCode);
         }
 
+        public static string GetStatusCodeInfoUrl(int statusCode)
+        {
+            return $"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{statusCode}";
+        }
+
         public static async Task<string> GetStatusCodeInfo(int statusCode)
         {
             var client = new HttpClient();
-            var url = $"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{statusCode}";
+            var url = GetStatusCodeInfoUrl(statusCode);
             var response = await client.GetAsync(url);
             var contents = response.Content;
             var result = await contents.ReadAsStringAsync();
