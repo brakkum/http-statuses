@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using AngleSharp.Html.Dom;
@@ -14,6 +16,7 @@ namespace http_statuses.Controllers
         [Route("/")]
         public ActionResult Index()
         {
+            ViewBag.Request = Request;
             return View();
         }
 
@@ -44,6 +47,7 @@ namespace http_statuses.Controllers
         {
             ViewBag.Title = "About";
             ViewBag.isValidStatusCode = false;
+            ViewBag.Request = Request;
             return View();
         }
 
@@ -58,6 +62,7 @@ namespace http_statuses.Controllers
 
             ViewBag.isValidStatusCode = true;
             ViewBag.StatusCode = statusCode;
+            ViewBag.Request = Request;
             return View();
         }
 
@@ -67,6 +72,12 @@ namespace http_statuses.Controllers
         public ActionResult CatchAll()
         {
             return new RedirectResult("/");
+        }
+
+        public static string GetAbsoluteUrl(HttpRequest request)
+        {
+            var uri = new Uri(request.GetDisplayUrl());
+            return uri.GetLeftPart(UriPartial.Path);
         }
 
         public bool IsValidStatusCode(int statusCode)
