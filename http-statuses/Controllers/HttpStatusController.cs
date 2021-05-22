@@ -24,21 +24,20 @@ namespace http_statuses.Controllers
         [Route("{statusCode:int}")]
         public ActionResult GetStatus(int statusCode)
         {
-            if (IsValidStatusCode(statusCode))
+            if (!IsValidStatusCode(statusCode))
             {
-                if (statusCode < 200)
-                {
-                    return new StatusCodeResult(statusCode);
-                }
-                Response.StatusCode = statusCode;
-                return new JsonResult(new
-                {
-                    success = true,
-                    statusCode,
-                });
+                return new RedirectResult("/");
             }
 
-            return new RedirectResult("/");
+            if (statusCode < 200)
+            {
+                return new StatusCodeResult(statusCode);
+            }
+
+            Response.StatusCode = statusCode;
+            ViewBag.StatusCode = statusCode;
+            ViewBag.Request = Request;
+            return View();
         }
 
         [HttpGet]

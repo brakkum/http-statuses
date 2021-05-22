@@ -1,0 +1,10 @@
+@{
+    Layout = "_base";
+    var statusCode = ViewBag.StatusCode;
+}
+
+<h1>@statusCode Response</h1>
+
+<p>
+    <a href="/about/@(statusCode)?from=get-status">Read More</a>
+</p>
