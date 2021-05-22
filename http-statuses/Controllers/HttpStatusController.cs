@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net;
 using AngleSharp;
 using System;
+using System.Text;
 
 namespace http_statuses.Controllers
 {
@@ -76,7 +77,8 @@ namespace http_statuses.Controllers
         public static string GetAbsoluteUrl(HttpRequest request)
         {
             var uri = new Uri(request.GetDisplayUrl());
-            return uri.GetLeftPart(UriPartial.Path);
+            var url = new StringBuilder(uri.GetLeftPart(UriPartial.Path));
+            return url.Replace("http://", "https://").ToString();
         }
 
         public bool IsValidStatusCode(int statusCode)
